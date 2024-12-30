@@ -3,9 +3,9 @@ import React from 'react'
 function Menuitem(props) {
   // 1rem=16px 1rem=4 unit of tailwind
   return (
-    <div className=' ml-0 w-192 h-32 m-4 shadow-md  rounded-lg border px-4 py-2 flex justify-between items-center justify-center'>
+    <div className='bg-opaque bg-green-300 bg-opacity-50 ml-0 w-192 h-32 m-4 shadow-md mb-2 rounded-lg border px-4 py-2 flex justify-between items-center justify-center'>
        <div>
-        <img className="max-h-200 h-36  w-40 p-4 rounded-lg "src={props.image} alt="" />
+        <img className="max-h-200 h-36 w-40 p-4 rounded-lg " src={props.image} alt="" />
        </div>
        <div>
         <h1 className='text-2xl font-bold-md '>{props.name}</h1>

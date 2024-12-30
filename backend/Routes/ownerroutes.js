@@ -64,5 +64,15 @@ router.post('/getmenu',async (req,res)=>{
     
     
 })
+router.post('/getrestaurantimg',async (req,res)=>{
+    let {ownerid}=req.body;
+    try {
+        let restimg=await Owner.find({ownerid});
+        console.log(restimg);
+        res.status(200).send(restimg);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+})
  
 module.exports=router;
