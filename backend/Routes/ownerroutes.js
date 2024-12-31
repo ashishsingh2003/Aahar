@@ -4,6 +4,7 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Owner = require('../Models/Owner');
 const Menu = require('../Models/Menu');
+
 router.post('/registerrestaurant',async (req,res)=>{
     let {image,name,address,opening,closing,ownerid}=req.body;
     console.log(ownerid);
@@ -40,7 +41,8 @@ router.post('/addmenu',async (req,res)=>{
                 name:name,
                 ingredients:ingredients,
                 price:price,
-                ownerid:ownerid
+                ownerid:ownerid,
+                stock:"true"
             })
             res.status(200).send(resp);
         } catch (error) {
@@ -74,5 +76,32 @@ router.post('/getrestaurantimg',async (req,res)=>{
         res.status(400).send(error.message);
     }
 })
- 
+router.post('/getstock',async (req,res)=>{
+    let {menuid}=req.body;
+    try {
+        let stock=await Menu.findById(menuid);
+        res.status(200).send(stock);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+    
+    
+})
+router.patch('/stock/:id',async (req,res)=>{
+    let {id}=req.params;
+    let {stock}=req.body;
+    console.log(stock);
+    try {
+        let resp=await Menu.findByIdAndUpdate(
+            id,{stock}
+        );
+        await Menu.bulkSave()
+        console.log(resp);
+        res.status(200).send(resp);
+    } catch (error) {
+        res.send(error.message);
+    }
+    
+
+})
 module.exports=router;

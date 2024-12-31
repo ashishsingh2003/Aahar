@@ -22,6 +22,11 @@ const menuschema=new mongoose.Schema({
     ownerid:{
         type:String,
         required:true
+    },
+    stock:{
+        type:String,
+        required:true,
+        default:"true"
     }
 
 })

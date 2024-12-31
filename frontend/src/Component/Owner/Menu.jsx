@@ -36,7 +36,7 @@ function Menu() {
         <ul>
         {
         menu.map((item,id)=>{
-            return <li><Menuitem  image={item.image} name={item.name} price={item.price}/></li>
+            return <li key={item._id}><Menuitem  id={item._id} image={item.image} name={item.name} price={item.price}/></li>
         })
         }
         </ul></div>

@@ -4,7 +4,7 @@ const app=express();
 const userroute  = require('./Routes/userroute');
 const ownerroutes  = require('./Routes/ownerroutes');
 const cors=require('cors');
-mongoose.connect('mongodb://127.0.0.1:27017/dummy')
+mongoose.connect('mongodb://127.0.0.1:27017/Aahar')
 .then(()=>{
     console.log("db connected");
 })
