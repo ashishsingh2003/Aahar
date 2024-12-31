@@ -1,5 +1,5 @@
 import React, { useContext, useRef } from 'react'
-import bgImage from '../Images/background.jpg'
+import loginback from '../Images/loginback.jpg'
 import { Link, useActionData, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { Ownercontext, Ownerrole } from '../context/Ownerid';
@@ -47,7 +47,7 @@ function Login() {
 
    }
   return (
-    <div className='flex items-center justify-center min-h-screen bg-gray-100 h-screen bg-cover bg-center  '   style={{ backgroundImage: `url(${bgImage})` }}>
+    <div className='flex items-center justify-center min-h-screen bg-gray-100 h-screen bg-cover bg-center  '   style={{ backgroundImage: `url(${loginback})` }}>
         <div className='w-full max-w-md space-y-4 p-8 bg-white rounded-lg shadow-md'>
         <h2 className='text-2xl text-center font-bold' >Login </h2>
         <div className='space-y-6'>

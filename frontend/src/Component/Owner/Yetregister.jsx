@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import bgImage from '../../Images/background.jpg'
 import { Ownerrole } from '../../context/Ownerid';
 import axios from 'axios';
+import { ToastContainer,toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Yetregister() {
     let nameref=useRef();
     let imageref=useRef();
@@ -16,11 +18,46 @@ function Yetregister() {
         const address=addressref.current.value;
         const opening=openingref.current.value;
         const closing=closingref.current.value;
+          if(name==="")
+          {
+              toast.error("Name is required",{
+                position:"top-right"
+              })
+          }
+          else if(image==="")
+          {
+            toast.error("image url is required",{
+              position:"top-right"
+            })
+          }
+          else if(address==="")
+            {
+              toast.error("address is required",{
+                position:"top-right"
+              })
+            }
+          else if(opening==="")
+              {
+                toast.error("Opening time is required",{
+                  position:"top-right"
+                })
+          }
+          else if(closing==="")
+            {
+              toast.error("Closing time is required",{
+                position:"top-right"
+              })
+        }
         try {
             let res=await axios.post('http://localhost:8080/registerrestaurant',{image,name,address,opening,closing,ownerid});
             console.log(res);
+            toast.success("Restaurant added successfully",{
+                          position:"top-right"
+                         })
         } catch (error) {
-            console.log(error.message);
+            toast.warn("already registered",{
+                position:"top-right"
+            })
         }
        
 
@@ -55,6 +92,7 @@ function Yetregister() {
                     <button onClick={register}className='px-4 py-2 mt-2 bg-green-500 hover:bg-green-700 rounded-lg w-full'>Register</button>
                    </div>
                </div>
+               <ToastContainer/>
            </div>
   )
 }

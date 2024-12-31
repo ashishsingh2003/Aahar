@@ -2,6 +2,8 @@ import React, { useRef } from 'react'
 import bgImage from '../../Images/background.jpg'
 import axios from 'axios';
 import { Ownerrole } from '../../context/Ownerid';
+import {ToastContainer,toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Addmenu() {
     let imageref=useRef();
     let nameref=useRef();
@@ -14,9 +16,36 @@ function Addmenu() {
           const image=imageref.current.value;
           const ingredients=ingredref.current.value;
           const price=priceref.current.value;
+          if(name==="")
+          {
+              toast.error("Name of dish is required",{
+                position:"top-right"
+              })
+          }
+          else if(image==="")
+          {
+            toast.error("image url is required",{
+              position:"top-right"
+            })
+          }
+          else if(price==="")
+            {
+              toast.error("Price is required",{
+                position:"top-right"
+              })
+            }
+          else if(ingredients==="")
+              {
+                toast.error("ingredients are required",{
+                  position:"top-right"
+                })
+          }
           try {
             let res=await axios.post('http://localhost:8080/addmenu',{image,name,ingredients,price,ownerid});
              console.log(res);
+             toast.success("Menu added successfully",{
+              position:"top-right"
+             })
           } catch (error) {
             console.log(error.message);
           }
@@ -48,6 +77,7 @@ function Addmenu() {
              <button onClick={addmenu}className='px-4 py-2 mt-2 bg-green-500 hover:bg-green-700 rounded-lg w-full'>Add</button>
             </div>
         </div>
+        <ToastContainer/>
     </div>
   )
 }
