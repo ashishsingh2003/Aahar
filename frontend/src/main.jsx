@@ -4,11 +4,15 @@ import './index.css'
 import App from './App.jsx'
 import {BrowserRouter} from 'react-router-dom'
 import { Ownerprovider } from './context/Ownerid.jsx'
+import { Customerprovider } from './context/Customerid.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
     <Ownerprovider>
-    <App />
+      <Customerprovider>
+         <App />
+      </Customerprovider>
+   
     </Ownerprovider>
     </BrowserRouter>
   </StrictMode>,

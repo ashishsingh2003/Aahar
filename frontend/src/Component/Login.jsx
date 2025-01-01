@@ -3,12 +3,14 @@ import loginback from '../Images/loginback.jpg'
 import { Link, useActionData, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { Ownercontext, Ownerrole } from '../context/Ownerid';
+import { Customerrole } from '../context/Customerid';
 function Login() {
   const navigate=useNavigate();
    let emailref=useRef();
    let passwordref=useRef();
    let roleref=useRef();
-   const {setownername,setownerid}=Ownerrole()
+   const {setownername,setownerid}=Ownerrole();
+   const {setcustomername,setcustomerid}=Customerrole();
    const login =async (e)=>{
     e.preventDefault();
     const email=emailref.current.value;
@@ -33,6 +35,8 @@ function Login() {
            navigate('/ownerdashboard');
          }
          else{
+          setcustomerid(user.data._id);
+          setcustomername(user.data.username);
           navigate('/customerdashboard');
          }
       }

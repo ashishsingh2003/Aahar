@@ -34,10 +34,10 @@ router.post('/signup',async (req,res)=>{
 
 //------------------------------Login-----------------------------------
 router.post('/login',async (req,res)=>{
-    console.log(req.body);
+    
    const {email,password,role}=req.body;
    const userexist=await User.findOne({email});
-   console.log(userexist.password);
+   console.log(userexist);
    console.log(password);
    console.log(role);
    console.log(email);
@@ -51,7 +51,8 @@ router.post('/login',async (req,res)=>{
         {
           res.status(400).send('false');
         }
-        res.status(200).send(userexist);
+        else{
+        res.status(200).send(userexist);}
     } catch (error) {
         res.send(error.message);
     }

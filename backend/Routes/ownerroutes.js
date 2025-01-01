@@ -104,4 +104,14 @@ router.patch('/stock/:id',async (req,res)=>{
     
 
 })
+router.get('/getrestaurant',async (req,res)=>{
+    try {
+        let restaurant=await Owner.find();
+        res.status(200).send(restaurant);
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+    
+
+})
 module.exports=router;
