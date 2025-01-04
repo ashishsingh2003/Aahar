@@ -4,6 +4,7 @@ import Restaurant from './Restaurant';
 import axios from 'axios';
 function Customerbody() {
     const [restaurant,setrestaurant]=useState([]);
+    const fun=()=>{
     useEffect(()=>{
         const fetchrestaurant=async ()=>{
             try {
@@ -16,7 +17,8 @@ function Customerbody() {
 
         }
         fetchrestaurant();
-    },[restaurant])
+    },[restaurant])}
+    fun();
   return (
     <div>
         <div className='w-full h-96 bg-cover bg-center flex items-center justify-center'  style={{backgroundImage: `url(${bgImage})`}}>
@@ -26,11 +28,12 @@ function Customerbody() {
              </div>
             
         </div>
+        <h1 className='text-5xl  font-sans text-center'>List of the Famous restaurant</h1>
         <div>
                  <ul>
                     {
                         restaurant.map((item,id)=>{
-                            return <li key={item._id}><Restaurant name={item.name} image={item.image} address={item.address} opening={item.opening} closing={item.closing}/></li>
+                            return <li key={item._id}><Restaurant  id={item.ownerid}name={item.name} image={item.image} address={item.address} opening={item.opening} closing={item.closing}/></li>
                         })
                     }
                  </ul>

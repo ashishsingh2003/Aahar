@@ -11,6 +11,7 @@ import Addmenu from './Component/Owner/Addmenu'
 import Register from './Component/Owner/Yetregister'
 import { Ownerprovider } from './context/Ownerid'
 import Menu from './Component/Owner/Menu'
+import Restaurantpage from './Component/Customer/Restaurantpage'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -30,6 +31,7 @@ function App() {
          <Route path="/addmenu" element={<Addmenu/>}></Route>
          <Route path="/register" element={<Register/>}></Route>
          <Route path="/menu" element={<Menu/>}></Route>
+         <Route path="/restaurantpage" element={<Restaurantpage/>}></Route>
     </Routes>
     </div>
   )

@@ -24,10 +24,10 @@ function Login() {
       const user=await axios.post('http://localhost:8080/login',{email,password,role});
       //whatever data we got how to check it is the desired data or not.
       //how to handle the incomng data.
-      console.log(user);
+      console.log(user.data.role);
       if(user.data!=false)
-      {
-         if(role==="Restaurant Owner")
+      {  console.log(user.data.role=="Restaurant Owner");
+         if(user.data.role=="Restaurant Owner")
          {
             console.log(user);
             setownerid(user.data._id);

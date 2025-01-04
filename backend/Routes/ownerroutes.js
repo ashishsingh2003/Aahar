@@ -114,4 +114,17 @@ router.get('/getrestaurant',async (req,res)=>{
     
 
 })
+router.post('/getrestaurantmenu',async (req,res)=>{
+    let {ownerid}=req.body;
+    
+    try {
+        let menu=await Menu.find({ownerid});
+       
+        res.status(200).json(menu);
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+    
+
+})
 module.exports=router;
