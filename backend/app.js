@@ -1,6 +1,9 @@
+const dotenv=require('dotenv');
+dotenv.config("");
 const express=require('express');
 const mongoose=require('mongoose');
 const app=express();
+app.use(express.urlencoded({extended:true}));
 const userroute  = require('./Routes/userroute');
 const ownerroutes  = require('./Routes/ownerroutes');
 const cors=require('cors');
@@ -22,4 +25,44 @@ app.use(userroute);
 app.use(ownerroutes);
 app.listen('8080',()=>{
     console.log("server connected");
+})
+require("dotenv").config();
+const stripe=require("stripe")(process.env.SECRET_STRIPE_KEY)
+app.post('/checkout',async (req,res)=>{
+    
+    try {
+        
+        const session=await stripe.checkout.sessions.create({
+            payment_method_types:["card"],
+            mode:"payment",
+            line_items:req.body.items.map(item=>{
+                return {
+                    price_data:{
+                        currency:"inr",
+                        product_data:{
+                            name:item.name
+                        },
+                        
+                        unit_amount:(item.price)*100,
+                    },
+                  
+                    quantity:item.quantity
+                }
+               
+               
+            }),
+           
+              
+              
+            success_url:`http://localhost:5173/customerdashboard`,
+            cancel_url:"http://localhost:5173/menu"
+
+        })
+       
+        res.json({url:session.url})
+    } catch (error) {
+        console.log("can not pay");
+        console.log(error.message);
+        res.json({error:error.message});
+    }
 })
