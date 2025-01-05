@@ -4,7 +4,8 @@ const router=express.Router();
 const mongoose=require('mongoose');
 const Owner = require('../Models/Owner');
 const Menu = require('../Models/Menu');
-
+const nodemailer=require('nodemailer');
+const User = require('../Models/User');
 router.post('/registerrestaurant',async (req,res)=>{
     let {image,name,address,opening,closing,ownerid}=req.body;
     console.log(ownerid);
@@ -126,5 +127,45 @@ router.post('/getrestaurantmenu',async (req,res)=>{
     }
     
 
+})
+router.post('/getuser',async (req,res)=>{
+    const {customerid}=req.body;
+    console.log(customerid);
+    try {
+        let user=await User.findById(customerid);
+        console.log(user);
+        res.status(200).send(user);
+    } catch (error) {
+        res.send(error.message)
+    }
+    
+})
+router.post('/sendconfirmation',async (req,res)=>{
+    let {name,email}=req.body;
+     
+    const config={
+        service:'gmail',
+        auth:{
+            user:'ashishsinghrana39@gmail.com',
+            pass:`${process.env.email_password}`
+        }
+    }
+    const transporter=nodemailer.createTransport(config);
+    let mail={
+        from:'ashishsinghrana39@gmail.com',
+        to:`${email}`,
+        subject:"Validation",
+        html:`<h1>You ordered  </h1>`
+    }
+    transporter.sendMail(mail,(error,info)=>{
+        if(error) {
+            console.log(error.message);
+        } else {
+            console.log(info);
+        }
+    })
+    
+    res.json("sent confirmation");
+   
 })
 module.exports=router;

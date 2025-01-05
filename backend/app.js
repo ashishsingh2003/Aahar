@@ -16,7 +16,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/Aahar')
 })
 app.use(cors({ 
     origin:['http://localhost:5173'],
-   credentials:true,
+    credentials:true,
     methods:["GET","POST","PATCH","DELETE"],
     headers: ["Content-Type", "Authorization", "Origin", "Accept"]
 }));
@@ -54,7 +54,7 @@ app.post('/checkout',async (req,res)=>{
            
               
               
-            success_url:`http://localhost:5173/customerdashboard`,
+            success_url:`http://localhost:5173/successfull`,
             cancel_url:"http://localhost:5173/menu"
 
         })
