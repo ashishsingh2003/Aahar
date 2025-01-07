@@ -17,7 +17,7 @@ function Customerbody() {
 
         }
         fetchrestaurant();
-    },[restaurant])}
+    },[])}
     fun();
   return (
     <div>

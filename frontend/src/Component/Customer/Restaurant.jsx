@@ -1,20 +1,20 @@
-import React from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { Currentrest } from '../../context/Currentrestaurant';
 
 function Restaurant(props) {
     let img=props.image;
     let navigate=useNavigate();
+    let {setrestaurantid,setimage}=Currentrest();
     // console.log(props.id);
+    //why at once two times rendered?
+   
+   
     const view=(e)=>{
       e.preventDefault();
-       navigate('/restaurantpage',{
-        state:{
-          image:props.image,
-          ownerid:props.id
-        },
-    
-       });
-    }
+      setrestaurantid(props.id);
+      setimage(img);
+      navigate('/restaurantpage')}
   return (
     <div className=' border bg-gray-100 p-4 shadow-md '>
          <div className='max-w-48 h-48 bg-center bg-cover rounded-lg rounded-b-none' style={{backgroundImage:`url(${img})`}}>

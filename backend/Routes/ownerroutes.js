@@ -6,6 +6,8 @@ const Owner = require('../Models/Owner');
 const Menu = require('../Models/Menu');
 const nodemailer=require('nodemailer');
 const User = require('../Models/User');
+const Order = require('../Models/Order');
+
 router.post('/registerrestaurant',async (req,res)=>{
     let {image,name,address,opening,closing,ownerid}=req.body;
     console.log(ownerid);
@@ -116,8 +118,8 @@ router.get('/getrestaurant',async (req,res)=>{
 
 })
 router.post('/getrestaurantmenu',async (req,res)=>{
-    let {ownerid}=req.body;
-    
+    let {ownerids}=req.body;
+    const ownerid=ownerids
     try {
         let menu=await Menu.find({ownerid});
        
@@ -140,32 +142,70 @@ router.post('/getuser',async (req,res)=>{
     }
     
 })
-router.post('/sendconfirmation',async (req,res)=>{
-    let {name,email}=req.body;
-     
-    const config={
-        service:'gmail',
-        auth:{
-            user:'ashishsinghrana39@gmail.com',
-            pass:`${process.env.email_password}`
-        }
-    }
-    const transporter=nodemailer.createTransport(config);
-    let mail={
-        from:'ashishsinghrana39@gmail.com',
-        to:`${email}`,
-        subject:"Validation",
-        html:`<h1>You ordered  </h1>`
-    }
-    transporter.sendMail(mail,(error,info)=>{
-        if(error) {
-            console.log(error.message);
-        } else {
-            console.log(info);
-        }
-    })
+router.post('/ordered',async (req,res)=>{
+    let {address,mobile,pincode,customerid,menuid,quantity}=req.body;
     
-    res.json("sent confirmation");
-   
+    try {
+       let owner=await Menu.findById(menuid);
+        console.log(owner);
+        
+            let ownerid=owner.ownerid;
+            let order=await Order.create({
+                address:address,
+                mobile:mobile,
+                pincode:pincode,
+                customerid:customerid,
+                menuid:menuid,
+                ownerid:ownerid,
+                quantity:quantity
+            })
+            res.json(order);
+       
+    } catch (error) {
+        res.json(error.message)
+    }
 })
+router.post('/getorder',async (req,res)=>{
+    let {ownerid}=req.body;
+    console.log(ownerid);
+    try {
+        const order=await Order.find({ownerid});
+        console.log(order);
+        res.status(200).send(order);
+    } catch (error) {
+        res.status(400).send(error.messsage)
+    }
+    
+
+})
+// router.post('/sendconfirmation',async (req,res)=>{
+//     let {customerid,productid,quantity}=req.body;
+//      const user=await User.findById(customerid);
+//      console.log(user);
+//      const product=await Menu.findById(productid);
+//     const config={
+//         service:'gmail',
+//         auth:{
+//             user:'ashishsinghrana39@gmail.com',
+//             pass:`${process.env.email_password}`
+//         }
+//     }
+//     const transporter=nodemailer.createTransport(config);
+//     let mail={
+//         from:'ashishsinghrana39@gmail.com',
+//         to:`${user.email}`,
+//         subject:"Validation",
+//         html:`<h1>You ordered ${product.name} for ${quantity*product.price}Rs </h1>`
+//     }
+//     transporter.sendMail(mail,(error,info)=>{
+//         if(error) {
+//             console.log(error.message);
+//         } else {
+//             console.log(info);
+//         }
+//     })
+    
+//     res.json("sent confirmation");
+   
+// })
 module.exports=router;

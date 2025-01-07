@@ -54,7 +54,7 @@ app.post('/checkout',async (req,res)=>{
            
               
               
-            success_url:`http://localhost:5173/successfull`,
+            success_url:`http://localhost:5173/successfull/${req.body.items[0].id}/${req.body.items[0].quantity}`,
             cancel_url:"http://localhost:5173/menu"
 
         })
