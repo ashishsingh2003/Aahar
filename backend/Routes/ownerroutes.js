@@ -178,34 +178,44 @@ router.post('/getorder',async (req,res)=>{
     
 
 })
-// router.post('/sendconfirmation',async (req,res)=>{
-//     let {customerid,productid,quantity}=req.body;
-//      const user=await User.findById(customerid);
-//      console.log(user);
-//      const product=await Menu.findById(productid);
-//     const config={
-//         service:'gmail',
-//         auth:{
-//             user:'ashishsinghrana39@gmail.com',
-//             pass:`${process.env.email_password}`
-//         }
-//     }
-//     const transporter=nodemailer.createTransport(config);
-//     let mail={
-//         from:'ashishsinghrana39@gmail.com',
-//         to:`${user.email}`,
-//         subject:"Validation",
-//         html:`<h1>You ordered ${product.name} for ${quantity*product.price}Rs </h1>`
-//     }
-//     transporter.sendMail(mail,(error,info)=>{
-//         if(error) {
-//             console.log(error.message);
-//         } else {
-//             console.log(info);
-//         }
-//     })
+router.post('/getordermenu',async (req,res)=>{
+    let {menuid}=req.body;
+    try {
+        let menu=await Menu.findById(menuid);
+        console.log(menu);
+        res.send(menu);
+    } catch (error) {
+        res.send(error.message);
+    }
+})
+router.post('/sendconfirmation',async (req,res)=>{
+    let {customerid,productid,quantity}=req.body;
+     const user=await User.findById(customerid);
+     console.log(user);
+     const product=await Menu.findById(productid);
+    const config={
+        service:'gmail',
+        auth:{
+            user:'ashishsinghrana39@gmail.com',
+            pass:`${process.env.email_password}`
+        }
+    }
+    const transporter=nodemailer.createTransport(config);
+    let mail={
+        from:'ashishsinghrana39@gmail.com',
+        to:`${user.email}`,
+        subject:"Validation",
+        html:`<h1>You ordered ${product.name} for ${quantity*product.price}Rs </h1>`
+    }
+    transporter.sendMail(mail,(error,info)=>{
+        if(error) {
+            console.log(error.message);
+        } else {
+            console.log(info);
+        }
+    })
     
-//     res.json("sent confirmation");
+    res.json("sent confirmation");
    
-// })
+})
 module.exports=router;

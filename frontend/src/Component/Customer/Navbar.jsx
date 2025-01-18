@@ -10,7 +10,7 @@ function Navbar() {
          <nav className="bg-white shadow-md sticky top-0 ">
     <div className="container mx-auto px-4 flex justify-between items-center py-4">
       {/* Logo */}
-      <div className="text-2xl font-bold text-green-500">
+      <div className="text-2xl font-bold text-blue-500">
         Aa<span className="text-gray-800">har</span>
       </div>
 
@@ -39,7 +39,7 @@ function Navbar() {
         {/* Cart Button */}
         <a
           href="#cart"
-          className=" py-2 px-4 bg-green-500 text-white rounded-md hover:bg-green-600"
+          className=" py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600"
         >
           Logout
         </a>

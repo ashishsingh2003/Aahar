@@ -28,8 +28,9 @@ function Customerbody() {
              </div>
             
         </div>
-        <h1 className='text-5xl  font-sans text-center'>List of the Famous restaurant</h1>
+        
         <div>
+        <h1 className='text-5xl m-2  mt-5 text-center' style={{fontFamily:"sans-serif"}}>List of the Famous restaurant</h1>
                  <ul>
                     {
                         restaurant.map((item,id)=>{

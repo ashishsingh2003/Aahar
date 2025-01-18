@@ -16,7 +16,7 @@ function Restaurant(props) {
       setimage(img);
       navigate('/restaurantpage')}
   return (
-    <div className=' border bg-gray-100 p-4 shadow-md '>
+    <div className='w-full max-w-48 m-4 '>
          <div className='max-w-48 h-48 bg-center bg-cover rounded-lg rounded-b-none' style={{backgroundImage:`url(${img})`}}>
          
          </div>

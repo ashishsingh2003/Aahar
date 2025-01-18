@@ -8,7 +8,7 @@ function OwnerDashboard() {
   const {ownerid}=Ownerrole();
   console.log(ownerid);
   return (
-    <div>
+    <div className='scrollbar-none scrollbar-width'>
       <Navbar/>
       <Ownerbody/>
     </div>

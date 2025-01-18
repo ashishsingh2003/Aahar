@@ -19,11 +19,12 @@ function Ownerbody() {
     fetchorders();
   },[])
   return (
-    <div className='bg-center bg-cover min-h-screen flex justify-center' style={{backgroundImage:`url(${bgImage})`}}>
+    <div className='bg-center bg-cover min-h-screen flex justify-center ' style={{backgroundImage:`url(${"https://wallpapercave.com/wp/wp2723829.jpg"})`}}>
+
              <ul>
               {
                 orders.map((item,id)=>{
-                  return (<li key={id} ><Order quantity={item.quantity} address={item.address} pincode={item.pincode} mobile={item.mobile}/></li>)
+                  return (<li key={id} ><Order menuid={item.menuid} quantity={item.quantity} address={item.address} pincode={item.pincode} mobile={item.mobile}/></li>)
                 })
               }
              </ul>

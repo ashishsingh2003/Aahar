@@ -1,3 +1,4 @@
+import  plugin  from 'tailwind-scrollbar';
 export default {
   content: [
     "./index.html",
@@ -6,5 +7,7 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin({ nocompatible: true }),
+  ],
 };
